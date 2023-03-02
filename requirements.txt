@@ -1,1 +1,3 @@
 whisper~=1.1.10
+numpy~=1.23.5
+huggingsound~=0.1.6
