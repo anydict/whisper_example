@@ -1,4 +1,5 @@
 whisper~=1.1.10
-numpy~=1.23.5
+numpy==1.24.2
 huggingsound~=0.1.6
 vosk~=0.3.45
+websockets~=10.4

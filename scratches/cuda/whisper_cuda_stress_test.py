@@ -1,6 +1,7 @@
 import concurrent.futures as pool
 import time
 import whisper
+path_sound = '/opt/scripts/whisper_example/scratches/'
 
 mm = []
 for rec in range(0, 25):
@@ -27,7 +28,7 @@ def transcribe_file(name: str, num: int):
 
 
 # first call for load gpu
-transcribe_file('long/example_1.mp3', 0)
+transcribe_file(f'{path_sound}long/example_1.mp3', 0)
 #
 # # second call for compare
 # transcribe_file('long/example_1.mp3')
@@ -35,7 +36,7 @@ transcribe_file('long/example_1.mp3', 0)
 data = []
 nn = []
 for rec in range(0, 1000):
-    data.append('long/example_1.mp3')
+    data.append(f'{path_sound}long/example_1.mp3')
     nn.append(rec)
 
 

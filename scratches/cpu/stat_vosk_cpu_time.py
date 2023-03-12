@@ -1,8 +1,10 @@
-
+from vosk import Model, KaldiRecognizer, SetLogLevel
 from time import time, process_time
-from huggingsound import SpeechRecognitionModel
+import wave
+SetLogLevel(0)
 real_time = []
 cpu_time = []
+path_sound = '/opt/scripts/whisper_example/scratches/'
 
 
 def timer_func(func):
@@ -22,60 +24,79 @@ def timer_func(func):
 
 @timer_func
 def transcribe_file(name: str):
-    transcriptions = model.transcribe([name])
-    print(transcriptions)
-    
+    wf = wave.open(name, "rb")
+    rec = KaldiRecognizer(model, wf.getframerate())
+    rec.SetWords(True)
 
-# model = SpeechRecognitionModel("jonatasgrosman/wav2vec2-large-xlsr-53-russian")
-model = SpeechRecognitionModel("emre/wav2vec2-xls-r-300m-Russian-small")
+    if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getcomptype() != "NONE":
+        print("Audio file must be WAV format mono PCM.")
+        exit(1)
+
+    while True:
+        data = wf.readframes(16000)
+        if len(data) == 0:
+            break
+        if rec.AcceptWaveform(data):
+            # print(rec.Result())
+            pass
+        else:
+            # print(rec.PartialResult())
+            pass
+
+    print(rec.FinalResult())
+
+
+model = Model(model_path="/opt/vosk/model/vosk-model-small-ru-0.22")
+# model = Model(model_path="/opt/vosk/model/vosk-model-ru-0.42/")
+
 # warmup
 real_time.clear()
 cpu_time.clear()
-transcribe_file('long/example_1.wav')
+transcribe_file(f'{path_sound}long/example_1.wav')
 
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good.wav')
+    transcribe_file(f'{path_sound}short/yes_good.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good_agree_3sec.wav')
+    transcribe_file(f'{path_sound}short/yes_good_agree_3sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good_agree_say_about_all_5sec.wav')
-print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
-
-
-real_time.clear()
-cpu_time.clear()
-for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good_agree_say_about_all_blabla_10sec.wav')
+    transcribe_file(f'{path_sound}short/yes_good_agree_say_about_all_5sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/long/text_to_voice_30sec.wav')
+    transcribe_file(f'{path_sound}short/yes_good_agree_say_about_all_blabla_10sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/long/text_to_voice_60sec.wav')
+    transcribe_file(f'{path_sound}long/text_to_voice_30sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/long/fast_news_600sec.wav')
+    transcribe_file(f'{path_sound}long/text_to_voice_60sec.wav')
+print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
+
+
+real_time.clear()
+cpu_time.clear()
+for i in range(0, 20):
+    transcribe_file(f'{path_sound}long/fast_news_600sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')

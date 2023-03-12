@@ -1,10 +1,10 @@
-
 from time import time, process_time
 import whisper
 import warnings
 warnings.filterwarnings("ignore")  # ignore transcribe warning CUDA available
 real_time = []
 cpu_time = []
+path_sound = '/opt/scripts/whisper_example/scratches/'
 
 
 def timer_func(func):
@@ -40,45 +40,45 @@ transcribe_file('long/example_1.wav')
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good.wav')
+    transcribe_file(f'{path_sound}short/yes_good.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good_agree_3sec.wav')
+    transcribe_file(f'{path_sound}short/yes_good_agree_3sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good_agree_say_about_all_5sec.wav')
-print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
-
-
-real_time.clear()
-cpu_time.clear()
-for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/short/yes_good_agree_say_about_all_blabla_10sec.wav')
+    transcribe_file(f'{path_sound}short/yes_good_agree_say_about_all_5sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/long/text_to_voice_30sec.wav')
+    transcribe_file(f'{path_sound}short/yes_good_agree_say_about_all_blabla_10sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/long/text_to_voice_60sec.wav')
+    transcribe_file(f'{path_sound}long/text_to_voice_30sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
 
 
 real_time.clear()
 cpu_time.clear()
 for i in range(0, 20):
-    transcribe_file('/opt/scripts/whisper_example/scratches/long/fast_news_600sec.wav')
+    transcribe_file(f'{path_sound}long/text_to_voice_60sec.wav')
+print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')
+
+
+real_time.clear()
+cpu_time.clear()
+for i in range(0, 20):
+    transcribe_file(f'{path_sound}long/fast_news_600sec.wav')
 print(f'real={sum(real_time)/len(real_time)} cpu={sum(cpu_time)/len(cpu_time)}\n\n')

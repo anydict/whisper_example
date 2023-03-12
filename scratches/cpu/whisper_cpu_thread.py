@@ -2,8 +2,8 @@ import threading
 import time
 import whisper
 import warnings
-
 warnings.filterwarnings("ignore")  # ignore transcribe warning CUDA available
+path_sound = '/opt/scripts/whisper_example/scratches/'
 
 
 def transcribe_file(name: str, language: str):
@@ -20,16 +20,16 @@ def transcribe_file(name: str, language: str):
 
 
 # first call for load cpu
-transcribe_file('long/example_1.mp3', "ru")
+transcribe_file(f'{path_sound}long/example_1.mp3', "ru")
 
 # second call for compare
-transcribe_file('long/example_1.mp3', "ru")
+transcribe_file(f'{path_sound}long/example_1.mp3', "ru")
 
-t1 = threading.Thread(target=transcribe_file, args=('long/example_1.mp3', "ru"))
+t1 = threading.Thread(target=transcribe_file, args=(f'{path_sound}long/example_1.mp3', "ru"))
 t1.start()
 
-t2 = threading.Thread(target=transcribe_file, args=('long/example_1.mp3', "ru"))
+t2 = threading.Thread(target=transcribe_file, args=(f'{path_sound}long/example_1.mp3', "ru"))
 t2.start()
 
-t3 = threading.Thread(target=transcribe_file, args=('long/example_1.mp3', "ru"))
+t3 = threading.Thread(target=transcribe_file, args=(f'{path_sound}long/example_1.mp3', "ru"))
 t3.start()
