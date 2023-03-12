@@ -14,7 +14,6 @@ Scratches for a quick launch of whisper
 | 60 | 4.974 | 2.324 | 7.854 | 20.447 | 20.706 |
 | 600 | 53.600 | 24.116 | 117.635 | Memmory error | Memmory error |
 
-  1.
 ## Процессорное время распознования с использованием CPU (AMD Ryzen 5 5600X )
 
 | Длительность ролика, сек | Whisper Tiny | Vosk Small | Vosk | Wav2Vec2 (Large Data) | Wav2Vec2 (Small Data) |
@@ -27,7 +26,6 @@ Scratches for a quick launch of whisper
 | 60 | 26.853 | 2.243 | 7.846 | 116.512 | 117.32 |
 | 600 | 282.045 | 24.091 | 117.516 | Memmory error | Memmory error |
 
-  1.
 ## Реальное время распознования с использованием CUDA (Nvidia 3050 8GB)
 
 | Длительность ролика, сек | Whisper Tiny | Vosk Small (batch 8 sec) | Vosk (batch 8 sec) | Wav2Vec2 | Nvidia NeMo |
