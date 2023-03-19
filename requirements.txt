@@ -4,3 +4,4 @@ huggingsound~=0.1.6
 vosk~=0.3.45
 websockets~=10.4
 jiwer~=2.5.1
+pymorphy2~=0.9.1

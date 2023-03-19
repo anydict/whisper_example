@@ -25,7 +25,7 @@ def timer_func(func):
 @timer_func
 def transcribe_file(name: str):
     transcriptions = model.transcribe([name])
-    # print(transcriptions)
+    print(transcriptions)
 
 
 # model = SpeechRecognitionModel("jonatasgrosman/wav2vec2-large-xlsr-53-russian", device='cuda:0')

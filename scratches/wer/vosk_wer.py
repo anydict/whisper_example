@@ -1,3 +1,6 @@
+import asyncio
+import wave
+import websockets
 import whisper
 import json
 import re
@@ -9,11 +12,29 @@ json_file_path = r'file_text.json'
 result = []
 
 
-def transcribe_file(name: str, model, language: str):
-    decode_options = dict(language=language, fp16=True)
-    transcribe_options = dict(task="transcribe", **decode_options)
-    transcription = model.transcribe(name, **transcribe_options)
-    return transcription["text"]
+def transcribe_file(name: str):
+    async def run_test(uri):
+        text = ""
+        async with websockets.connect(uri) as websocket:
+            wf = wave.open(name, "rb")
+            await websocket.send('{ "config" : { "sample_rate" : %d } }' % (wf.getframerate()))
+            buffer_size = 64000  # 0.4 seconds of audio, don't make it too small otherwise compute will be slow
+            while True:
+                data = wf.readframes(buffer_size)
+
+                if len(data) == 0:
+                    break
+
+                await websocket.send(data)
+                response = json.loads(await websocket.recv())
+                text += response.get('text', '')
+
+            await websocket.send('{"eof" : 1}')
+            response = json.loads(await websocket.recv())
+            text += response.get('text', '')
+            return text
+
+    return asyncio.run(run_test('ws://localhost:2700'))
 
 
 def word_number2number(text: str):
@@ -93,16 +114,13 @@ def format_text(text: str):
 
 
 def main():
-    whisper_model = whisper.load_model("tiny", device='cuda')
-    # whisper_model = whisper.load_model("small", device='cuda')
-
     with open(json_file_path) as f:
         data = json.load(f)
 
     for rec in data:
         print(f'{path_sound}{rec}.wav')
         reference = format_text(data[rec]['TEXT'])
-        hypothesis = format_text(transcribe_file(f'{path_sound}{rec}.wav', whisper_model, "ru"))
+        hypothesis = format_text(transcribe_file(f'{path_sound}{rec}.wav'))
         print(reference)
         print(hypothesis)
 

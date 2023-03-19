@@ -1,4 +1,4 @@
-import whisper
+from huggingsound import SpeechRecognitionModel
 import json
 import re
 import pymorphy2
@@ -7,13 +7,14 @@ from jiwer import wer
 path_sound = 'sounds/'
 json_file_path = r'file_text.json'
 result = []
+model = SpeechRecognitionModel("jonatasgrosman/wav2vec2-large-xlsr-53-russian", device='cuda:0')
+# the model from below is worse than the one that is higher in value WER
+# model = SpeechRecognitionModel("emre/wav2vec2-xls-r-300m-Russian-small", device='cuda:0')
 
 
-def transcribe_file(name: str, model, language: str):
-    decode_options = dict(language=language, fp16=True)
-    transcribe_options = dict(task="transcribe", **decode_options)
-    transcription = model.transcribe(name, **transcribe_options)
-    return transcription["text"]
+def transcribe_file(name: str):
+    transcriptions = model.transcribe([name])
+    return transcriptions[0]['transcription']
 
 
 def word_number2number(text: str):
@@ -93,16 +94,13 @@ def format_text(text: str):
 
 
 def main():
-    whisper_model = whisper.load_model("tiny", device='cuda')
-    # whisper_model = whisper.load_model("small", device='cuda')
-
     with open(json_file_path) as f:
         data = json.load(f)
 
     for rec in data:
         print(f'{path_sound}{rec}.wav')
         reference = format_text(data[rec]['TEXT'])
-        hypothesis = format_text(transcribe_file(f'{path_sound}{rec}.wav', whisper_model, "ru"))
+        hypothesis = format_text(transcribe_file(f'{path_sound}{rec}.wav'))
         print(reference)
         print(hypothesis)
 

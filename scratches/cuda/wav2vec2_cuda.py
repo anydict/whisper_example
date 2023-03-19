@@ -2,7 +2,8 @@ import datetime
 from huggingsound import SpeechRecognitionModel
 path_sound = '/opt/scripts/whisper_example/scratches/'
 
-model = SpeechRecognitionModel("jonatasgrosman/wav2vec2-large-xlsr-53-russian", device='cuda:0')
+# model = SpeechRecognitionModel("jonatasgrosman/wav2vec2-large-xlsr-53-russian", device='cuda:0')
+model = SpeechRecognitionModel("emre/wav2vec2-xls-r-300m-Russian-small", device='cuda:0')
 
 audio_paths = [f'{path_sound}short/music_yes_good_2sec.wav']
 print(datetime.datetime.now())

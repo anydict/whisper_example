@@ -1,4 +1,4 @@
-import whisper
+from faster_whisper import WhisperModel
 import json
 import re
 import pymorphy2
@@ -9,11 +9,17 @@ json_file_path = r'file_text.json'
 result = []
 
 
-def transcribe_file(name: str, model, language: str):
-    decode_options = dict(language=language, fp16=True)
+def transcribe_file(name: str, model, language: str = 'ru'):
+    decode_options = dict(language=language, beam_size=1)
     transcribe_options = dict(task="transcribe", **decode_options)
-    transcription = model.transcribe(name, **transcribe_options)
-    return transcription["text"]
+    segments, info = model.transcribe(name, **transcribe_options)
+
+    text = ''
+
+    for segment in segments:
+        text = text + ' ' + segment.text
+
+    return text
 
 
 def word_number2number(text: str):
@@ -93,8 +99,8 @@ def format_text(text: str):
 
 
 def main():
-    whisper_model = whisper.load_model("tiny", device='cuda')
-    # whisper_model = whisper.load_model("small", device='cuda')
+    model_path = "/opt/scripts/whisper_example/whisper-tiny-v2-ct2/"
+    whisper_model = WhisperModel(model_path, device="cuda", compute_type="float16")
 
     with open(json_file_path) as f:
         data = json.load(f)

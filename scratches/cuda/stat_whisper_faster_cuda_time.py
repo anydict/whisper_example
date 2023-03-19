@@ -1,7 +1,5 @@
 from time import time, process_time
 from faster_whisper import WhisperModel
-import warnings
-warnings.filterwarnings("ignore")  # ignore transcribe warning CUDA available
 real_time = []
 cpu_time = []
 path_sound = '/opt/scripts/whisper_example/scratches/'
