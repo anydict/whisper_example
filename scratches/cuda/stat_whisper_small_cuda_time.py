@@ -29,7 +29,7 @@ def transcribe_file(name: str, language: str = 'ru'):
     # print(transcription["text"])
 
 
-model = whisper.load_model("tiny", device='cuda')
+model = whisper.load_model("small", device='cuda')
 # warmup
 real_time.clear()
 cpu_time.clear()
