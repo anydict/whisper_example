@@ -37,7 +37,7 @@ def transcribe_file(name: str, language: str = 'ru'):
 
 
 # Run on GPU with FP16
-model_path = "/opt/scripts/whisper_example/whisper-tiny-v2-ct2/"
+model_path = "/opt/scripts/whisper_example/whisper-tiny-float16/"
 model = WhisperModel(model_path, device="cuda", compute_type="float16")
 
 

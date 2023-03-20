@@ -42,3 +42,8 @@ Scratches for a quick launch of whisper
 |simple|51\.3|24\.02|9\.27|44\.79|13\.23|24\.68|20\.14|15\.51|39\.94|39\.61|
 |ivrclip|35\.55|22\.91|17\.31|34\.37|15\.44|19\.39|18\.47|16\.39|30\.67|24\.49|
 
+## **Time parallel use all resources GPU (Nvidia 3050 8GB)**
+
+| clip count dur=5 | Whisper Tiny | Whisper Base | Whisper Small | Faster Whisper Tiny | Faster Whisper Small | Vosk Small | Vosk 0.22 | Vosk 0.42 | Wav2Vec2 | Nvidia NeMo (Sber) |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| 1000 | 94.48 | 177.07 | 401.97 | 66.61 | 155.24 | 78.67 | 70.52 | 762.28 | 90.118 | 67.147 |
