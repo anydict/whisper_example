@@ -46,4 +46,4 @@ Scratches for a quick launch of whisper
 
 | clip count dur=5 | Whisper Tiny | Whisper Base | Whisper Small | Faster Whisper Tiny | Faster Whisper Small | Vosk Small | Vosk 0.22 | Vosk 0.42 | Wav2Vec2 | Nvidia NeMo (Sber) |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| 1000 | 94.48 | 177.07 | 401.97 | 66.61 | 155.24 | 78.67 | 70.52 | 762.28 | 90.118 | 67.147 |
+| 1000 | 94.48 | 177.07 | 401.97 | 66.61 | 155.24 | 78.67 | 70.52 | 762.28 | 90.118 | 11.59 |

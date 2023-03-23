@@ -5,19 +5,19 @@ import json
 import asyncio
 import wave
 import websockets
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds'
-MAX_INSTANCE = 1
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/2'
+MAX_INSTANCE = 4  # for small
+# MAX_INSTANCE = 2  # for 0.22
+# MAX_INSTANCE = 1  # for 0.44
 names = list(range(0, 1000))
 
 
-# full_time=21.86576223373413
-# full_time=10.630181550979614
 def transcribe_file(model):
     async def run_test(uri):
 
         while len(names) > 0:
             th_name = threading.current_thread().name
-            filename = names.pop() % 2
+            filename = names.pop() % 10
             filepath = f'{path_sound}/{filename}.wav'
             print(f'run th_name={th_name} with filepath={filepath} model={model}')
 
@@ -35,6 +35,8 @@ def transcribe_file(model):
                     await websocket.send(data)
                     response = json.loads(await websocket.recv())
                     text += response.get('text', '')
+
+                wf.close()
 
                 await websocket.send('{"eof" : 1}')
                 response = json.loads(await websocket.recv())

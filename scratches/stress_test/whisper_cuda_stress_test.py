@@ -3,15 +3,15 @@ import threading
 import time
 
 import whisper
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds'
-MAX_INSTANCE = 1
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/2'
+MAX_INSTANCE = 3
 names = list(range(0, 1000))
 
 
 def transcribe_file(model):
     th_name = threading.current_thread().name
     while len(names) > 0:
-        filename = names.pop() % 2
+        filename = names.pop() % 10
         filepath = f'{path_sound}/{filename}.wav'
         print(f'run th_name={th_name} with filepath={filepath}')
         try:
@@ -27,7 +27,7 @@ def transcribe_file(model):
 models = []
 for rec in range(0, MAX_INSTANCE):
     print(rec)
-    gpu_model = whisper.load_model("small", device='cuda')
+    gpu_model = whisper.load_model("tiny", device='cuda')
     models.append(gpu_model)
     # WARMUP
     warmup_decode_options = dict(language="ru", fp16=True)
