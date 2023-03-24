@@ -6,7 +6,8 @@ import time
 # from nemo.collections.asr.models import EncDecCTCModel
 import nemo.collections.asr as nemo_asr
 
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/16khz5'
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/5second'
+# path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/16khz5second'
 MAX_INSTANCE = 2
 quartznet = nemo_asr.models.EncDecCTCModel.restore_from("/home/anydict/QuartzNet15x5_golos.nemo")  # SberRuModel
 names = []
@@ -29,7 +30,6 @@ def transcribe_file(model):
             print(f"end_time={(time.time() - first_time)}")
         except Exception as exp:
             print(exp)
-
 
 
 models = []

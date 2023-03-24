@@ -3,7 +3,7 @@ import time
 import concurrent.futures as pool
 
 
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/16khz5'
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/16khz5second'
 path_convert = '/opt/scripts/whisper_example/scratches/stress_test/convert_wav'
 files = []
 MAX_INSTANCE = 1

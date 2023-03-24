@@ -164,7 +164,7 @@ def format_text(text: str):
 
 
 def main():
-    whisper_model = whisper.load_model("base", device='cuda')
+    whisper_model = whisper.load_model("tiny", device='cuda')
     # whisper_model = whisper.load_model("small", device='cuda')
 
     with open(json_file_path) as f:

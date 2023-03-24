@@ -4,7 +4,7 @@ import threading
 import time
 
 from faster_whisper import WhisperModel
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/2'
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/5second'
 MAX_INSTANCE = 5
 names = []
 

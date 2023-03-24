@@ -5,7 +5,7 @@ import json
 import asyncio
 import wave
 import websockets
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/2'
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/5second'
 MAX_INSTANCE = 4  # for small
 # MAX_INSTANCE = 2  # for 0.22
 # MAX_INSTANCE = 1  # for 0.44

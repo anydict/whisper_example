@@ -3,7 +3,7 @@ import threading
 import time
 
 import whisper
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/2'
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/5second'
 MAX_INSTANCE = 3
 names = list(range(0, 1000))
 
