@@ -132,3 +132,4 @@ dmypy.json
 .pyre/
 /whisper-tiny-v2-ct2/
 /whisper-*/
+/scratches/stress_test/convert_wav/*.wav
