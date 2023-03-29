@@ -6,14 +6,14 @@ import time
 # from nemo.collections.asr.models import EncDecCTCModel
 import nemo.collections.asr as nemo_asr
 
-path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/5second'
+path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/16khz2dot5second'
 # path_sound = '/opt/scripts/whisper_example/scratches/stress_test/sounds/16khz5second'
-MAX_INSTANCE = 2
+MAX_INSTANCE = 1
 quartznet = nemo_asr.models.EncDecCTCModel.restore_from("/home/anydict/QuartzNet15x5_golos.nemo")  # SberRuModel
 names = []
 
 for i in range(0, 100):
-    names.append([f'{path_sound}/{num%10}.wav' for num in range(0, 10)])
+    names.append([f'{path_sound}/{num%10}.wav' for num in range(0, 20)])
 
 
 def transcribe_file(model):

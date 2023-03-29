@@ -3,6 +3,7 @@ import json
 import re
 import pymorphy2
 from jiwer import wer
+from spellchecker import SpellChecker
 # from nemo.collections.asr.models import EncDecCTCModel
 
 path_sound = 'sounds/'
@@ -143,6 +144,20 @@ def anglicisms2russian(text: str):
     return text
 
 
+def fix_misspell(text: str):
+    print(f'before: {text}')
+    text = f' {text} '
+    spell = SpellChecker(language='ru')
+    misspelled = spell.unknown(text.split(' '))
+    for word in misspelled:
+        if spell.correction(word):
+            print(word)
+            print(spell.correction(word))
+            text = text.replace(f' {word} ', f' {spell.correction(word)} ')
+    print(f'after: {text}')
+    return text.strip()
+
+
 def format_text(text: str):
     text = text.lower()
     text = text.replace("ё", "е")
@@ -160,6 +175,7 @@ def format_text(text: str):
     text = re.sub("([0-9]) ([0-9])", "\\1\\2", text)
     text = anglicisms2russian(text)
     text = word_number2number(text)
+    # text = fix_misspell(text)
     return text
 
 
